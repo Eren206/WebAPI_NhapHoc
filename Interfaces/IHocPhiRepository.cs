@@ -9,5 +9,6 @@ namespace testKetNoi.Interfaces
         ChiTietHocPhiDto getChiTietHocPhi(string cccd);
         bool SaveBill(HoaDon hoaDon,string cccd);
         public bool Save();
+        public HoaDon GetHoaDon(string maHD);
     }
 }

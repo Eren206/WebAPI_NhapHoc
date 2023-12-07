@@ -103,7 +103,12 @@ namespace testKetNoi.Repository
             context.HoaDon.Add(hoaDon);
             var sv=context.SinhVien.Where(s => s.SoCCCD == cccd).FirstOrDefault();
             sv.MaHD = hoaDon.MaHD;
+            context.SinhVien.Update(sv); 
             return Save();
+        }
+        public HoaDon GetHoaDon(string maHD)
+        {
+            return context.HoaDon.Where(h => h.MaHD == maHD).First();
         }
     }
 }

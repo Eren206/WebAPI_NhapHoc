@@ -25,10 +25,12 @@ namespace testKetNoi.Models
         public string MaHD { get; set; }
         public string MaNganh { get; set; }
         public string MatKhau { get; set; }
+        public string AvatarPath { get; set; }
 
         public virtual HoaDon MaHDNavigation { get; set; }
         public virtual HocPhiNganh MaNganhNavigation { get; set; }
         public virtual DangKyKTX DangKyKTX { get; set; }
+        public virtual NganHang NganHang { get; set; }
         public virtual ICollection<HoSoSinhVien> HoSoSinhVien { get; set; }
         public virtual ICollection<MuaDongPhuc> MuaDongPhuc { get; set; }
         public virtual ICollection<ThongTinNguoiThan> ThongTinNguoiThan { get; set; }

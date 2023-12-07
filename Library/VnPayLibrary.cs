@@ -54,7 +54,7 @@ public class VnPayLibrary
             Token = vnpSecureHash,
             VnPayResponseCode = vnpResponseCode,
             Date = payTime,
-            Amount = amount
+            Amount = amount.Remove(amount.Length-3,2)
         };
     }
     public string GetIpAddress(HttpContext context)

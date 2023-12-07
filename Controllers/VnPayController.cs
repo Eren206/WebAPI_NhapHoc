@@ -16,18 +16,27 @@ namespace testKetNoi.Controllers
     {
         private readonly IVnPayService _vnPayService;
         public IMapper mapper;
-
+        private readonly ISinhVienRepository sinhVienRepository;
         private readonly IHocPhiRepository hocPhiRepository;
-        public VnPayController(IVnPayService vnPayService, IHocPhiRepository hocPhiRepository,IMapper mapper)
+        public VnPayController(IVnPayService vnPayService, IHocPhiRepository hocPhiRepository,ISinhVienRepository sinhVienRepository,IMapper mapper)
         {
             _vnPayService = vnPayService;
             this.mapper= mapper;
+            this.sinhVienRepository = sinhVienRepository;
             this.hocPhiRepository = hocPhiRepository;
         }
         [HttpPost("/getlink/{cccd}")]
         [ProducesResponseType(200, Type = typeof(string))]
         public IActionResult CreatePaymentUrl(string cccd)
         {
+            if (!sinhVienRepository.SinhVienExists(cccd))
+            {
+                return NotFound();
+            }
+            if (sinhVienRepository.isPay(cccd))
+            {
+                return Ok("Sinh viên đã thanh toán học phí online!");
+            }
             PaymentInformationModel model = new PaymentInformationModel();
             var description = hocPhiRepository.getChiTietHocPhi(cccd);
             model.Amount = (double)hocPhiRepository.getTongHocPhi(cccd);

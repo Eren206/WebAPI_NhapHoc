@@ -24,6 +24,7 @@ namespace testKetNoi.Controllers
         }
         [HttpGet("{cccd}/TongHocPhi")]
         [ProducesResponseType(200, Type = typeof(decimal))]
+        [ProducesResponseType(400)]
         public IActionResult GetTongHocPhi(string cccd)
         {
             if (!SinhVienRepository.SinhVienExists(cccd))
@@ -35,13 +36,37 @@ namespace testKetNoi.Controllers
             return Ok(hocPhi);
         }
         [HttpGet("{cccd}/ChiTietHP")]
+        [ProducesResponseType(200, Type = typeof(ChiTietHocPhiDto))]
+        [ProducesResponseType(400)]
         public IActionResult GetChiTietHocPhi(string cccd)
         {
             if (!SinhVienRepository.SinhVienExists(cccd))
             {
                 return NotFound();
             }
-            return Ok(HocPhiRepository.getChiTietHocPhi(cccd));
+            var cthp = HocPhiRepository.getChiTietHocPhi(cccd);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(cthp);
+        }
+        [Authorize]
+        [HttpGet("/HoaDon/{cccd}")]
+        [ProducesResponseType(200,Type=typeof(HoaDonDto))]
+        [ProducesResponseType(404)]
+        public IActionResult GetHoaDon(string cccd)
+        {
+            if (!SinhVienRepository.SinhVienExists(cccd))
+            {
+                return NotFound();
+            }
+            if (!SinhVienRepository.isPay(cccd))
+            {
+                return NotFound("Không tìm thấy hóa đơn/Chưa thanh toán");
+            }
+            var sv = SinhVienRepository.GetSinhVienByCCCD(cccd);
+            var hd = HocPhiRepository.GetHoaDon(sv.MaHD);
+            var hdMapped = mapper.Map<HoaDonDto>(hd);
+            return Ok(hdMapped);
         }
     }
 }

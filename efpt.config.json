@@ -24,10 +24,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[GiaoVien]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[HoaDon]",
          "ObjectType": 0
       },
@@ -49,6 +45,10 @@
       },
       {
          "Name": "[dbo].[MuaDongPhuc]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NganHang]",
          "ObjectType": 0
       },
       {

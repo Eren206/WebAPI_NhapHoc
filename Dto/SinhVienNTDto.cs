@@ -10,6 +10,7 @@
         public string ThuongTru { get; set; }
         public string SDT { get; set; }
         public string? Email { get; set; }
+        public string AvatarPath { get; set; }
         public NguoiThanDto NguoiThan1 { get; set; }
         public NguoiThanDto NguoiThan2 { get; set; }
     }

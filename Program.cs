@@ -20,6 +20,7 @@ builder.Services.AddScoped<IVnPayService, VnPayService>();
 builder.Services.AddScoped<INguoiThanRepository, NguoiThanRepository>();
 builder.Services.AddScoped<IAuthenRepository, AuthenRepository>();
 builder.Services.AddScoped<IHocPhiRepository, HocPhiRepository>();
+builder.Services.AddScoped<IDongPhucRepository, DongPhucRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<DataContext>(options =>
 {

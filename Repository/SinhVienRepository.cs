@@ -47,5 +47,38 @@ namespace testKetNoi.Repository
         {
             return context.HoSo.OrderBy(h => h.MaHoSo).ToList();
         }
+
+        public bool createHoSoSinhVien(HoSoSinhVien hssv)
+        {
+            context.HoSoSinhVien.Add(hssv);
+            return Save();
+        }
+
+        public bool isPay(string cccd)
+        {
+            if(context.SinhVien.Where(s => s.SoCCCD == cccd).FirstOrDefault().MaHD != null)
+            {
+                return true; 
+            }
+            return false;
+        }
+
+        public bool isHoSoRegister(HoSoSinhVien hssv)
+        {
+            return context.HoSoSinhVien.Any(h => h.SoCCCD == hssv.SoCCCD && h.MaHoSo == hssv.MaHoSo);
+            
+        }
+
+        public bool updateHoSoSinhVien(HoSoSinhVien hssv)
+        {
+          
+            context.HoSoSinhVien.Update(hssv);
+            return Save();
+        }
+
+        public bool isResNganHang(string cccd)
+        {
+            return context.NganHang.Any(n => n.SoCCCD == cccd);
+        }
     }
 }

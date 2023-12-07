@@ -26,8 +26,7 @@ namespace testKetNoi.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<SinhVien>))]
         public IActionResult GetSinhViens()
         {
-            //var sinhViens = mapper.Map<List<SinhVienDto>>(SinhVienRepository.GetSinhViens());
-            var sinhViens = SinhVienRepository.GetSinhViens();
+            var sinhViens = mapper.Map<List<SinhVienDto>>(SinhVienRepository.GetSinhViens());
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -37,13 +36,19 @@ namespace testKetNoi.Controllers
 
         [HttpGet("{cccd}")]
         [ProducesResponseType(200, Type = typeof(SinhVien))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public IActionResult GetPhieuSinhVien(string cccd)
         {
+
             if (!SinhVienRepository.SinhVienExists(cccd))
             {
                 return NotFound();
             }
+
             var SinhVien = mapper.Map<SinhVienNTDto>(SinhVienRepository.GetSinhVienByCCCD(cccd));
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             if (NguoiThanRepository.IsCreated(cccd))
             {
                 var nt = NguoiThanRepository.getIDNguoiThans(cccd);
@@ -54,7 +59,7 @@ namespace testKetNoi.Controllers
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
             return Ok(SinhVien);
         }
-        [HttpPut("{cccd}")]
+        [HttpPut("updateSV/{cccd}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -103,6 +108,39 @@ namespace testKetNoi.Controllers
                 return StatusCode(500, ModelState);
             }
 
+            return Ok();
+        }
+        [HttpPost("hoSo/{cccd}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateHoSo(string cccd,[FromBody] HoSoSinhVienDto hoSoSV)
+        {
+            var mappedHoSoSV = mapper.Map<HoSoSinhVien>(hoSoSV);
+            if (hoSoSV == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!SinhVienRepository.SinhVienExists(cccd))
+            {
+                return NotFound();
+            }
+            if(cccd != hoSoSV.SoCCCD) return BadRequest();
+            if (SinhVienRepository.isHoSoRegister(mappedHoSoSV))
+            {
+                if (SinhVienRepository.updateHoSoSinhVien(mappedHoSoSV))
+                {
+                    return Ok();
+                }
+                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ, ko ht update");
+                return StatusCode(500, ModelState);
+            }
+            if (!SinhVienRepository.createHoSoSinhVien(mappedHoSoSV))
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ, ko ht create");
+                return StatusCode(500, ModelState);
+            }
+            if(!ModelState.IsValid) { return BadRequest(ModelState); }
             return Ok();
         }
     }

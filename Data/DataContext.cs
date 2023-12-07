@@ -21,13 +21,13 @@ namespace testKetNoi.Data
 
         public virtual DbSet<DangKyKTX> DangKyKTX { get; set; }
         public virtual DbSet<DongPhuc> DongPhuc { get; set; }
-        public virtual DbSet<GiaoVien> GiaoVien { get; set; }
         public virtual DbSet<HoSo> HoSo { get; set; }
         public virtual DbSet<HoSoSinhVien> HoSoSinhVien { get; set; }
         public virtual DbSet<HoaDon> HoaDon { get; set; }
         public virtual DbSet<HocPhiNganh> HocPhiNganh { get; set; }
         public virtual DbSet<KTX> KTX { get; set; }
         public virtual DbSet<MuaDongPhuc> MuaDongPhuc { get; set; }
+        public virtual DbSet<NganHang> NganHang { get; set; }
         public virtual DbSet<NguoiThan> NguoiThan { get; set; }
         public virtual DbSet<SinhVien> SinhVien { get; set; }
         public virtual DbSet<ThongTinNguoiThan> ThongTinNguoiThan { get; set; }
@@ -71,27 +71,6 @@ namespace testKetNoi.Data
                 entity.Property(e => e.TenDongPhuc)
                     .IsRequired()
                     .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<GiaoVien>(entity =>
-            {
-                entity.HasKey(e => e.MaGV);
-
-                entity.Property(e => e.MaGV).HasMaxLength(50);
-
-                entity.Property(e => e.HoTen)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.NgaySinh).HasColumnType("date");
-
-                entity.Property(e => e.QueQuan)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.SDT)
-                    .IsRequired()
-                    .HasMaxLength(15);
             });
 
             modelBuilder.Entity<HoSo>(entity =>
@@ -226,6 +205,34 @@ namespace testKetNoi.Data
                     .HasConstraintName("FK_MuaDongPhuc_SinhVien");
             });
 
+            modelBuilder.Entity<NganHang>(entity =>
+            {
+                entity.HasKey(e => e.SoCCCD)
+                    .HasName("PK_GiaoVien");
+
+                entity.Property(e => e.SoCCCD).HasMaxLength(12);
+
+                entity.Property(e => e.DichVu)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.HoTenInTrenThe)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.NgayCap).HasColumnType("date");
+
+                entity.Property(e => e.SDT)
+                    .IsRequired()
+                    .HasMaxLength(15);
+
+                entity.HasOne(d => d.SoCCCDNavigation)
+                    .WithOne(p => p.NganHang)
+                    .HasForeignKey<NganHang>(d => d.SoCCCD)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_NganHang_SinhVien");
+            });
+
             modelBuilder.Entity<NguoiThan>(entity =>
             {
                 entity.HasKey(e => e.IdNguoiThan);
@@ -255,6 +262,8 @@ namespace testKetNoi.Data
                 entity.HasKey(e => e.SoCCCD);
 
                 entity.Property(e => e.SoCCCD).HasMaxLength(12);
+
+                entity.Property(e => e.AvatarPath).HasMaxLength(200);
 
                 entity.Property(e => e.Email).HasMaxLength(50);
 

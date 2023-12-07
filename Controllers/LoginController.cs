@@ -26,7 +26,7 @@ namespace testKetNoi.Controllers
         public IActionResult Validate([FromBody] TaiKhoan taiKhoan)
         {
             var tk = AuthenRepository.getValidUser(taiKhoan.SoCCCD, taiKhoan.MatKhau);
-            if (tk == null) //không đúng tai
+            if (tk == null) //không đúng tài khoản và mật khẩu
             {
                 return Ok(new LoginAPI
                 {

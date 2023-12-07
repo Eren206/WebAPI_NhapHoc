@@ -12,6 +12,7 @@ namespace testKetNoi.Dto
         public string ThuongTru { get; set; }
         public string SDT { get; set; }
         public string? Email { get; set; }
-        
+        public string AvatarPath { get; set; }
+
     }
 }
