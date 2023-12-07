@@ -22,7 +22,7 @@ namespace testKetNoi.Controllers
             this.HocPhiRepository = hocPhiRepository;
             this.mapper = mapper;
         }
-        [HttpGet("{cccd}/TongHocPhi")]
+        [HttpGet("tonghocphi/{cccd}")]
         [ProducesResponseType(200, Type = typeof(decimal))]
         [ProducesResponseType(400)]
         public IActionResult GetTongHocPhi(string cccd)
@@ -35,7 +35,7 @@ namespace testKetNoi.Controllers
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
             return Ok(hocPhi);
         }
-        [HttpGet("{cccd}/ChiTietHP")]
+        [HttpGet("chitiethp/{cccd}")]
         [ProducesResponseType(200, Type = typeof(ChiTietHocPhiDto))]
         [ProducesResponseType(400)]
         public IActionResult GetChiTietHocPhi(string cccd)
@@ -50,7 +50,7 @@ namespace testKetNoi.Controllers
             return Ok(cthp);
         }
         [Authorize]
-        [HttpGet("/HoaDon/{cccd}")]
+        [HttpGet("hoadon/{cccd}")]
         [ProducesResponseType(200,Type=typeof(HoaDonDto))]
         [ProducesResponseType(404)]
         public IActionResult GetHoaDon(string cccd)

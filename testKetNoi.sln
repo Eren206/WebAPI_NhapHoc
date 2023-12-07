@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonReviewApp", "..\Pokemon_review_api\pokemon-review-api\PokemonReviewApp\PokemonReviewApp.csproj", "{C81C05F3-4471-4912-9A94-E7EF2B75BD69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "..\OcelotGateway\OcelotGateway.csproj", "{9AE1DE8B-7511-491D-ABEB-E30D520794A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,10 @@ Global
 		{330C093C-7FA3-4238-BE45-6E32320AEDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{330C093C-7FA3-4238-BE45-6E32320AEDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{330C093C-7FA3-4238-BE45-6E32320AEDC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C81C05F3-4471-4912-9A94-E7EF2B75BD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C81C05F3-4471-4912-9A94-E7EF2B75BD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C81C05F3-4471-4912-9A94-E7EF2B75BD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C81C05F3-4471-4912-9A94-E7EF2B75BD69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE1DE8B-7511-491D-ABEB-E30D520794A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE1DE8B-7511-491D-ABEB-E30D520794A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE1DE8B-7511-491D-ABEB-E30D520794A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE1DE8B-7511-491D-ABEB-E30D520794A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

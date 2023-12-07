@@ -25,7 +25,7 @@ namespace testKetNoi.Controllers
             this.sinhVienRepository = sinhVienRepository;
             this.hocPhiRepository = hocPhiRepository;
         }
-        [HttpPost("/getlink/{cccd}")]
+        [HttpPost("getlink/{cccd}")]
         [ProducesResponseType(200, Type = typeof(string))]
         public IActionResult CreatePaymentUrl(string cccd)
         {
