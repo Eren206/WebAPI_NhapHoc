@@ -20,6 +20,7 @@ namespace testKetNoi.Models
         public string GiuongNam { get; set; }
         public string WC { get; set; }
         public string DichVuDiKem { get; set; }
+        public string NamHoc { get; set; }
 
         public virtual ICollection<DangKyKTX> DangKyKTX { get; set; }
     }

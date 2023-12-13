@@ -25,7 +25,7 @@ namespace testKetNoi.Controllers
             this.sinhVienRepository = sinhVienRepository;
             this.hocPhiRepository = hocPhiRepository;
         }
-        [HttpPost("getlink/{cccd}")]
+        [HttpGet("getlink/{cccd}")]
         [ProducesResponseType(200, Type = typeof(string))]
         public IActionResult CreatePaymentUrl(string cccd)
         {
@@ -56,7 +56,7 @@ namespace testKetNoi.Controllers
         }
         // orderDes in response = modelName + modelDes + modelAmount in PaymentInformationModel
         //MaHD = response.paymentId
-        [HttpGet("getResponseJsonVnPay")]
+        [HttpGet("ketquathanhtoan")]
         public IActionResult PaymentCallback()
         {
             var response = _vnPayService.PaymentExecute(Request.Query);

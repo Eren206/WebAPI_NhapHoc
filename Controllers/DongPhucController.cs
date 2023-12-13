@@ -21,7 +21,7 @@ namespace testKetNoi.Controllers
             this.DongPhucRepository = dongPhucRepository;
             this.mapper=mapper;
         }
-        [HttpGet()]
+        [HttpGet("danhsachdongphuc")]
         [ProducesResponseType(200,Type=typeof(IEnumerable<DongPhucDto>))]
         [ProducesResponseType(400)]
         public IActionResult GetDanhSachDongPhuc()

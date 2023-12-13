@@ -22,6 +22,7 @@ namespace testKetNoi.Controllers
             this.NguoiThanRepository = NguoiThanRepository;
             this.mapper = mapper;
         }
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<SinhVien>))]
         public IActionResult GetSinhViens()
@@ -35,7 +36,7 @@ namespace testKetNoi.Controllers
         }
 
         [HttpGet("{cccd}")]
-        [ProducesResponseType(200, Type = typeof(SinhVien))]
+        [ProducesResponseType(200, Type = typeof(SinhVienNTDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public IActionResult GetPhieuSinhVien(string cccd)
@@ -61,7 +62,7 @@ namespace testKetNoi.Controllers
         }
         [HttpPut("updateSV/{cccd}")]
         [ProducesResponseType(400)]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public  IActionResult UpdateSinhVien(string cccd,
             [FromBody] SinhVienNTDto updatedSinhVien)
@@ -110,7 +111,7 @@ namespace testKetNoi.Controllers
 
             return Ok();
         }
-        [HttpPost("hoSo/{cccd}")]
+        [HttpPost("hoso/{cccd}")]
         [ProducesResponseType(201)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
@@ -132,12 +133,12 @@ namespace testKetNoi.Controllers
                 {
                     return Ok();
                 }
-                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ, ko ht update");
+                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ");
                 return StatusCode(500, ModelState);
             }
             if (!SinhVienRepository.createHoSoSinhVien(mappedHoSoSV))
             {
-                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ, ko ht create");
+                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ");
                 return StatusCode(500, ModelState);
             }
             if(!ModelState.IsValid) { return BadRequest(ModelState); }

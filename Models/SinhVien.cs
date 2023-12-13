@@ -18,13 +18,12 @@ namespace testKetNoi.Models
         public string HoTen { get; set; }
         public string QuocTich { get; set; }
         public string GioiTinh { get; set; }
-        public DateTime? NgaySinh { get; set; }
+        public DateTime NgaySinh { get; set; }
         public string ThuongTru { get; set; }
         public string SDT { get; set; }
         public string Email { get; set; }
         public string MaHD { get; set; }
         public string MaNganh { get; set; }
-        public string MatKhau { get; set; }
         public string AvatarPath { get; set; }
 
         public virtual HoaDon MaHDNavigation { get; set; }

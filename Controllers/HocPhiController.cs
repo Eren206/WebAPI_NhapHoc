@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using testKetNoi.Data;
 using testKetNoi.Dto;
 using testKetNoi.Interfaces;
@@ -38,6 +39,7 @@ namespace testKetNoi.Controllers
         [HttpGet("chitiethp/{cccd}")]
         [ProducesResponseType(200, Type = typeof(ChiTietHocPhiDto))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public IActionResult GetChiTietHocPhi(string cccd)
         {
             if (!SinhVienRepository.SinhVienExists(cccd))
@@ -49,7 +51,6 @@ namespace testKetNoi.Controllers
                 return BadRequest(ModelState);
             return Ok(cthp);
         }
-        [Authorize]
         [HttpGet("hoadon/{cccd}")]
         [ProducesResponseType(200,Type=typeof(HoaDonDto))]
         [ProducesResponseType(404)]
@@ -66,6 +67,8 @@ namespace testKetNoi.Controllers
             var sv = SinhVienRepository.GetSinhVienByCCCD(cccd);
             var hd = HocPhiRepository.GetHoaDon(sv.MaHD);
             var hdMapped = mapper.Map<HoaDonDto>(hd);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             return Ok(hdMapped);
         }
     }

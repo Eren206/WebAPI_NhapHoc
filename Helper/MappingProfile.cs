@@ -17,6 +17,7 @@ namespace testKetNoi.Helper
             CreateMap<HoSoSinhVien, HoSoSinhVienDto>(); CreateMap<HoSoSinhVienDto,HoSoSinhVien >();
             CreateMap<DongPhuc,DongPhucDto>();CreateMap<DongPhucDto, DongPhuc>();  
             CreateMap<MuaDongPhuc ,MuaDongPhucDto>(); CreateMap<MuaDongPhucDto, MuaDongPhuc>();
+            CreateMap<DangKyKTX, DangKyKTXDto>();CreateMap<DangKyKTXDto ,DangKyKTX>();
         }
     }
 }

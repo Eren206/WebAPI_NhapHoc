@@ -45,11 +45,15 @@ namespace testKetNoi.Repository
 
         public TaiKhoan getValidUser(string soCccd, string matKhau)
         {
-            var sv = context.SinhVien.SingleOrDefault(s => s.SoCCCD == soCccd && s.MatKhau==matKhau);
+            var sv = context.SinhVien.SingleOrDefault(s => s.SoCCCD == soCccd);
+            if (!sv.NgaySinh.ToString("ddMMyyyy").Equals(matKhau))
+            {
+                sv = null;
+            }
             if (sv == null) return null;
             TaiKhoan tk = new TaiKhoan();
             tk.SoCCCD = sv.SoCCCD;
-            tk.MatKhau = sv.MatKhau;
+            tk.MatKhau = sv.NgaySinh.ToString("ddMMyyyy");
             return tk;
         }
     }

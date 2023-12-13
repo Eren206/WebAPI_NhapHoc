@@ -20,6 +20,7 @@ namespace testKetNoi.Models
         public decimal PhiBHYT { get; set; }
         public decimal PhiBHTN { get; set; }
         public decimal? PhiCLC { get; set; }
+        public string NamApDung { get; set; }
 
         public virtual ICollection<SinhVien> SinhVien { get; set; }
     }

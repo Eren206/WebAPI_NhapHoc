@@ -141,6 +141,8 @@ namespace testKetNoi.Data
 
                 entity.Property(e => e.KinhPhiNhapHoc).HasColumnType("money");
 
+                entity.Property(e => e.NamApDung).HasMaxLength(20);
+
                 entity.Property(e => e.PhiBHTN).HasColumnType("money");
 
                 entity.Property(e => e.PhiBHYT).HasColumnType("money");
@@ -169,6 +171,8 @@ namespace testKetNoi.Data
                 entity.Property(e => e.GiuongNam)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.Property(e => e.NamHoc).HasMaxLength(50);
 
                 entity.Property(e => e.TenPhong)
                     .IsRequired()
@@ -268,6 +272,7 @@ namespace testKetNoi.Data
                 entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.GioiTinh)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsFixedLength();
 
@@ -278,8 +283,6 @@ namespace testKetNoi.Data
                 entity.Property(e => e.MaHD).HasMaxLength(50);
 
                 entity.Property(e => e.MaNganh).HasMaxLength(20);
-
-                entity.Property(e => e.MatKhau).HasMaxLength(50);
 
                 entity.Property(e => e.NgaySinh).HasColumnType("date");
 

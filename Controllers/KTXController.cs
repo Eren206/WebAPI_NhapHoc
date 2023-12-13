@@ -13,32 +13,50 @@ namespace testKetNoi.Controllers
     public class KTXController : Controller
     {
         public IKTXRepository KTXRepository { get; }
-
-        public KTXController(IKTXRepository KTXRepository) {
-            this.KTXRepository= KTXRepository;
+        public IMapper mapper { get; }
+        public ISinhVienRepository SinhVienRepository { get; }
+        public KTXController(IKTXRepository KTXRepository,IMapper mapper, ISinhVienRepository SinhVienRepository)
+        {
+            this.KTXRepository = KTXRepository;
+            this.mapper = mapper;
+            this.SinhVienRepository = SinhVienRepository;
         }
-        [HttpGet]
+        [HttpGet("danhsachktx")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<KTX>))]
         public IActionResult GetKTXs()
         {
-            var sinhViens =KTXRepository.GetKTXs();
+            var ktxs =mapper.Map<List<KTXDto>>(KTXRepository.getAll());
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(sinhViens);
+            return Ok(ktxs);
         }
-        [HttpGet("{maKTX}")]
-        [ProducesResponseType(200, Type = typeof(KTX))]
-        public IActionResult GetKTX(string maKTX)
+        [HttpPost("dangky/{cccd}")]
+        public IActionResult DangKyKTX(string cccd, [FromBody] DangKyKTXDto dangKyDto)
         {
-            if (!KTXRepository.KTXExists(maKTX))
+            var dangKy = mapper.Map<DangKyKTX>(dangKyDto);
+            if (dangKyDto == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!SinhVienRepository.SinhVienExists(cccd))
             {
                 return NotFound();
             }
-            var KTX = KTXRepository.GetKTX(maKTX);
+            if (cccd != dangKy.SoCCCD) return BadRequest();
+            if (KTXRepository.isDangKy(cccd, dangKy.MaPhong))
+            {
+                return Ok("Lỗi! Sinh viên đã đăng ký phòng này!");
+            }
+            
+            if (!KTXRepository.dangKy(dangKy))
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra khi đăng ký");
+                return StatusCode(500, ModelState);
+            }
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
-            return Ok(KTX);
+            return Ok();
         }
     }
 }

@@ -4,8 +4,11 @@ namespace testKetNoi.Interfaces
 {
     public interface IKTXRepository
     {
-        ICollection<KTX> GetKTXs();
+        IEnumerable<KTX> getAll();
         KTX GetKTX(string maKTX);
         bool KTXExists(string maKTX);
+        bool dangKy(DangKyKTX dangKyKTX);
+        bool isDangKy(string cccd,string maPhong);
+        bool Save();
     }
 }
