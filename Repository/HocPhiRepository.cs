@@ -64,6 +64,7 @@ namespace testKetNoi.Repository
             decimal bhyt = (decimal)hpn.PhiBHYT;
             decimal bhtn = (decimal)hpn.PhiBHTN;
             var dangKy = context.DangKyKTX.Where(k => k.SoCCCD == sv.SoCCCD).FirstOrDefault();
+            
             if (dangKy != null)
             {
                 string maKTX = dangKy.MaPhong;

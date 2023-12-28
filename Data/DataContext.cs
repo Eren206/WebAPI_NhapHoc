@@ -160,27 +160,13 @@ namespace testKetNoi.Data
 
                 entity.Property(e => e.MaPhong).HasMaxLength(20);
 
-                entity.Property(e => e.DichVuDiKem)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.DonGia).HasColumnType("smallmoney");
-
-                entity.Property(e => e.GioiTinh).HasMaxLength(10);
-
-                entity.Property(e => e.GiuongNam)
-                    .IsRequired()
-                    .HasMaxLength(20);
+                entity.Property(e => e.DonGia).HasColumnType("money");
 
                 entity.Property(e => e.NamHoc).HasMaxLength(50);
 
                 entity.Property(e => e.TenPhong)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.Property(e => e.WC)
-                    .IsRequired()
-                    .HasMaxLength(20);
             });
 
             modelBuilder.Entity<MuaDongPhuc>(entity =>
@@ -289,6 +275,8 @@ namespace testKetNoi.Data
                 entity.Property(e => e.QuocTich).HasMaxLength(20);
 
                 entity.Property(e => e.SDT).HasMaxLength(20);
+
+                entity.Property(e => e.TamTru).HasMaxLength(100);
 
                 entity.Property(e => e.ThuongTru).HasMaxLength(100);
 

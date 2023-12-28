@@ -18,14 +18,25 @@ namespace testKetNoi.Controllers
     public class LoginController : Controller
     {
         public IAuthenRepository AuthenRepository { get; }
-        public LoginController(IAuthenRepository authenRepository)
+        public ISinhVienRepository SinhVienRepository { get; }
+        public LoginController(IAuthenRepository authenRepository, ISinhVienRepository sinhVienRepository)
         {
             this.AuthenRepository = authenRepository;
+            this.SinhVienRepository = sinhVienRepository;
         }
         [HttpPost]
         public IActionResult Validate([FromBody] TaiKhoan taiKhoan)
         {
+            if (!SinhVienRepository.SinhVienExists(taiKhoan.SoCCCD))
+            {
+                return Ok(new LoginAPI
+                {
+                    success = false,
+                    message = "Invalid username/password"
+                });
+            }
             var tk = AuthenRepository.getValidUser(taiKhoan.SoCCCD, taiKhoan.MatKhau);
+            
             if (tk == null) //không đúng tài khoản và mật khẩu
             {
                 return Ok(new LoginAPI

@@ -18,6 +18,7 @@ namespace testKetNoi.Helper
             CreateMap<DongPhuc,DongPhucDto>();CreateMap<DongPhucDto, DongPhuc>();  
             CreateMap<MuaDongPhuc ,MuaDongPhucDto>(); CreateMap<MuaDongPhucDto, MuaDongPhuc>();
             CreateMap<DangKyKTX, DangKyKTXDto>();CreateMap<DangKyKTXDto ,DangKyKTX>();
+            CreateMap<NganHang, NganHangDto>(); CreateMap<NganHangDto, NganHang>();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace testKetNoi.Models
         public string QuocTich { get; set; }
         public string GioiTinh { get; set; }
         public DateTime NgaySinh { get; set; }
+        public string TamTru { get; set; }
         public string ThuongTru { get; set; }
         public string SDT { get; set; }
         public string Email { get; set; }

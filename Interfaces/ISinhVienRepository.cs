@@ -13,7 +13,9 @@ namespace testKetNoi.Interfaces
         bool createHoSoSinhVien(HoSoSinhVien hssv);
         bool isHoSoRegister(HoSoSinhVien hssv);
         bool updateHoSoSinhVien(HoSoSinhVien hssv);
-        bool isResNganHang(string cccd);
+        bool isResBanking(string cccd);
+        bool createBanking(NganHang nganHang);
+        bool updateBanking(NganHang nganHang);
         bool Save();
     }
 }

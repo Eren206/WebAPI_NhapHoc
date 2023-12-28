@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Net.Mime;
 using testKetNoi.Data;
 using testKetNoi.Dto;
 using testKetNoi.Interfaces;
@@ -76,9 +77,20 @@ namespace testKetNoi.Repository
             return Save();
         }
 
-        public bool isResNganHang(string cccd)
+        public bool isResBanking(string cccd)
         {
             return context.NganHang.Any(n => n.SoCCCD == cccd);
+        }
+        public bool createBanking(NganHang nganHang)
+        {
+            context.NganHang.Add(nganHang);
+            return Save();
+        }
+
+        public bool updateBanking(NganHang nganHang)
+        {
+            context.NganHang.Update(nganHang);
+            return Save();
         }
     }
 }

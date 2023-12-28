@@ -73,7 +73,6 @@ namespace testKetNoi.Controllers
                 cccd = response.OrderDescription.Substring(0, 12);
                 hocPhiRepository.SaveBill(mapper.Map<HoaDon>(hoaDon), cccd);
             }
-            
             return Json(response);
         }
     }

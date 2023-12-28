@@ -144,5 +144,38 @@ namespace testKetNoi.Controllers
             if(!ModelState.IsValid) { return BadRequest(ModelState); }
             return Ok();
         }
+        [HttpPost("banking/{cccd}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateBanking(string cccd, [FromBody] NganHangDto nganHangDto)
+        {
+            var nganHang = mapper.Map<NganHang>(nganHangDto);
+            if (nganHang == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!SinhVienRepository.SinhVienExists(cccd))
+            {
+                return NotFound();
+            }
+            if (cccd != nganHang.SoCCCD) return BadRequest();
+            if (SinhVienRepository.isResBanking(cccd))
+            {
+                if (SinhVienRepository.updateBanking(nganHang))
+                {
+                    return Ok();
+                }
+                ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật thông tin ngân hàng");
+                return StatusCode(500, ModelState);
+            }
+
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            if (SinhVienRepository.createBanking(nganHang))
+            {
+                return Ok();
+            };
+            return Ok();
+        }
     }
 }
