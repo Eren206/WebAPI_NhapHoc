@@ -39,8 +39,16 @@ namespace testKetNoi.Repository
         }
         public bool UpdateSinhVien(SinhVien sinhVien)
         {
-            context.SinhVien.Update(sinhVien);
-            
+            var sv = context.SinhVien.Where(s => s.SoCCCD == sinhVien.SoCCCD).FirstOrDefault();
+            sv.HoTen=sinhVien.HoTen;
+            sv.QuocTich=sinhVien.QuocTich;
+            sv.GioiTinh=sinhVien.GioiTinh;
+            sv.NgaySinh=sinhVien.NgaySinh; 
+            sv.ThuongTru=sinhVien.ThuongTru;
+            sv.SDT=sinhVien.SDT;
+            sv.Email=sinhVien.Email;
+            sv.AvatarPath=sinhVien.AvatarPath;
+            context.SinhVien.Update(sv);
             return Save();
         }
 

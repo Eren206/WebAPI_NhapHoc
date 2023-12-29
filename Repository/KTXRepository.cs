@@ -39,9 +39,20 @@ namespace testKetNoi.Repository
             return saved > 0 ? true : false;
         }
 
-        public bool isDangKy(string cccd,string maPhong)
+        public bool isDuplicate(string cccd,string maPhong)
         {
             return context.DangKyKTX.Any(k => k.SoCCCD == cccd && k.MaPhong == maPhong);
+        }
+
+        public bool isRes(string cccd)
+        {
+            return context.DangKyKTX.Any(k => k.SoCCCD == cccd);
+        }
+
+        public bool updateKTX(DangKyKTX dangKyKTX)
+        {
+            context.DangKyKTX.Update(dangKyKTX);
+            return Save();
         }
     }
 }

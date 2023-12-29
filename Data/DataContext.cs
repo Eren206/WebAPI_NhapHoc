@@ -36,16 +36,19 @@ namespace testKetNoi.Data
         {
             modelBuilder.Entity<DangKyKTX>(entity =>
             {
-                entity.HasKey(e => new { e.SoCCCD, e.MaPhong });
+                entity.HasKey(e => e.SoCCCD)
+                    .HasName("PK_DangKyKTX_1");
 
                 entity.HasIndex(e => e.SoCCCD, "IX_DangKyKTX")
                     .IsUnique();
 
                 entity.Property(e => e.SoCCCD).HasMaxLength(12);
 
-                entity.Property(e => e.MaPhong).HasMaxLength(20);
-
                 entity.Property(e => e.GhiChu).HasMaxLength(500);
+
+                entity.Property(e => e.MaPhong)
+                    .IsRequired()
+                    .HasMaxLength(20);
 
                 entity.HasOne(d => d.MaPhongNavigation)
                     .WithMany(p => p.DangKyKTX)

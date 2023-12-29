@@ -8,7 +8,9 @@ namespace testKetNoi.Interfaces
         KTX GetKTX(string maKTX);
         bool KTXExists(string maKTX);
         bool dangKy(DangKyKTX dangKyKTX);
-        bool isDangKy(string cccd,string maPhong);
+        bool isDuplicate(string cccd,string maPhong);
+        bool isRes(string cccd);
+        bool updateKTX(DangKyKTX dangKyKTX);
         bool Save();
     }
 }

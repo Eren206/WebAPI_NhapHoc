@@ -75,6 +75,10 @@ namespace testKetNoi.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if(!SinhVienRepository.SinhVienExists(cccd))
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(); 

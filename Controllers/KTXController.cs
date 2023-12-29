@@ -45,11 +45,19 @@ namespace testKetNoi.Controllers
                 return NotFound();
             }
             if (cccd != dangKy.SoCCCD) return BadRequest();
-            if (KTXRepository.isDangKy(cccd, dangKy.MaPhong))
+            if (KTXRepository.isDuplicate(cccd, dangKy.MaPhong))
             {
-                return Ok("Lỗi! Sinh viên đã đăng ký phòng này!");
+                return Ok("Sinh viên đã đăng ký phòng này!");
             }
-            
+            if (KTXRepository.isRes(cccd))
+            {
+                if (KTXRepository.updateKTX(dangKy))
+                {
+                    return Ok();
+                }
+                ModelState.AddModelError("", "Có lỗi xảy ra khi chỉnh sửa thông tin đăng ký");
+                return StatusCode(500, ModelState);
+            }
             if (!KTXRepository.dangKy(dangKy))
             {
                 ModelState.AddModelError("", "Có lỗi xảy ra khi đăng ký");
